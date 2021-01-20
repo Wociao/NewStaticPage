@@ -211,8 +211,7 @@ both CNN and long short-term memory (LSTM) models.</p>
                 <img src="NNsystem - Copy (2).png" loading="lazy" alt="Mountain landscape" width="700" height="400">
                 <figcaption>
                   <p>
-                    To analyze the user viewing behavior, we first deploy the YOLOv3object detection algorithm to detect the objects in each videoframe.  Then, we implement the tracking algorithm from Collins etal. combined with location-based verification to match the objectsbetween frames.  After that, we parse the user head movement dataand draw the conclusion on which objects the user has been watchingduring the live streaming session.
-                  </p>
+                    Cloud-Client system and how our SPV works</p>
                   </figcaption>
               <figure>
                 <img src="SPV.jpg" loading="lazy" alt="Mountain landscape" width="700" height="400">
@@ -229,7 +228,18 @@ both CNN and long short-term memory (LSTM) models.</p>
                 <img src="HardwareAttack.JPG" loading="lazy" alt="Mountain landscape" width="700" height="400">
                 <figcaption>
                   <p>
-                    We frst
+                    we implement
+a prototype system of a security sensitive surveillance camera,
+which has an on-device motion detection module to detect the
+objects in motion in the captured video in real time, as demonstrated
+in the above figure, which shows the
+hardware system setup using Xilinx Zynq-7000 ZC702 SoC. The
+SoC has a CPU component that contains two ARM cores and an
+FPGA component that contains a Xilinx FPGA board. We employ
+the CPU part on the board to provide basic interface to receive
+the video frames from the HDMI card, and we deploy a motion
+detection IP core in the FPGA part to conduct real time motion detection
+based on the received video frames. We then
 develop a proof-of-concept prototype demonstrating video replay
 attacks, in which the compromised surveillance device hides the
 chosen suspicious motion by overwriting the corresponding frames
