@@ -24,7 +24,7 @@
 
         <div class="abstract">
           <!-- |  <a href="https://scholar.google.co.uk/citations?view_op=list_works&hl=en&user=E44JoMkAAAAJ">Scholar</a>| <a href="CV_XianglongFeng.pdf" target=_blank>CV   -->
-          <h4> <a href="/index.html">HomePage</a> |<a href="#UVP">User viewport prediction</a> | <a href="#publications">Security </a> | <a href="#teaching">AI for 5/6G</a> </a></h4>
+          <h4> <a href="/index.html">HomePage</a> |<a href="#UVP">User viewport prediction</a> | <a href="#Security">Security </a> | <a href="#6G">AI for 5/6G</a> </a></h4>
           
         </div>
         <div>
@@ -47,26 +47,26 @@
         <div class="left" style="float: left; width: 50%;">
           <ul>
             <li>
-              Hardware security 
+              <a href="#HardwareSecurity">Hardware security </a>
             </li>
             <li>
-              Security of machine learning
+              <a href="#DNNFPGA">Security of machine learning</a>
             </li>
             <li>
-              Heterogeneous computing platform/ IoT /mobile platform
+              <a href="#HardwareSecurity">Heterogeneous computing platform/ IoT /mobile platform</a>
             </li>              
           </ul>
         </div>
         <div class="right" style="float: right; width: 50%;">
           <ul>
             <li>
-              Machine learning/ AI/ Computer Vision
+              <a href="#UVP">Machine learning/ AI/ Computer Vision</a>
             </li>
             <li>
-              VR/AR video streaming system
+              <a href="#UVP">VR/AR video streaming system</a>
             </li>
             <li>
-              5/6G, next-generation wireless communication
+              <a href="#6G">5/6G, next-generation wireless communication</a>a>
             </li>              
           </ul>
         </div>
@@ -91,63 +91,270 @@
       </div>
       <main>
         <article>
-          <h2 id="UVP">User viewport prediction</h2>
+          <h2 id="UVP">User viewport prediction for live VR video streaming system</h2>
             <div>
-              <p>User viewport prediction</p>
+              <p>Given the demands of high resolution and high frame rate in VR
+                streaming to ensure user’s quality of experience (QoE), the VR video
+                content is typically huge in size and thus poses significant challenges
+                in the network bandwidth consumption. Even if a single or
+                small number of VR video viewing sessions can be supported by
+                the state-of-the-art high bandwidth networks, the nature of the video
+                streaming services that could involve millions of concurrent viewing
+                sessions would create significant capacity challenges in both the
+                backbone and edge networks. Such challenges would eventually
+                be converted to degraded QoE towards the user end, significantly
+                blocking the wider deployment of premium VR experiences.
+                </p>
             </div>
             <div> 
               <figure>
                 <img src="system2.jpg" loading="lazy" alt="Mountain landscape" width="700" height="400">
                 <figcaption>
+                  <p>The potential solution to the bandwidth challenge of VR streaming
+                leverages the fact that the user can only watch an around 90-
+                degree viewport at any point of time, leaving the rest (more than
+                80%) of the video content in the 360-degree frame unnecessary to
+                be delivered to the mobile HMD. One example solution is selective
+                streaming [38], which proposes to stream the portion of video
+                that the user is more likely to watch in high resolution, while the
+                rest of the video is delivered in low resolution.</p>
+                </figcaption>
+              </figure>
+            </div>
+            
+            <h3 >Solution A: Motion detection and feature tracking(LiveMotion)</h3>
+            <div>
+              <figure>
+                <img src="BasicMethod.png" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                <figcaption>
+                  <p>We develop a new viewport prediction scheme that works with live 360 video streaming and complicated user
+head movement patterns. Different from all the existing approaches on the historical or current user behavior, our
+approach employs a user model combining the video content and the user interests for viewport prediction. Our
+key idea is that, even though the user behavior is hardly predictable, there is often a close correlation between
+the user’s viewport of interest and the moving objects in the video. It is because most users would focus and
+follow the most active objects in the 360-degree frames, which are often the objects in motion (e.g., the ball in a
+soccer game). Therefore, we employ computer vision-based techniques to detect and track the objects in motion,
+which serve as the predictor of the user’s future viewport of interest. In particular, we develop a set of algorithms
+to accommodate the various user movement patterns following a Tracking-Recovery-Update-Evaluation (T-R-U-E)
+workflow</p>
+                </figcaption>
+              </figure>
+            </div>
+            <h3 >Solution B: online CNN based viewport prediction (LiveDeep)</h3>
+            <div>
+              <figure>
+                <img src="Arch.png" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                <figcaption>
+                  <p>We explored the feasibility of using a
+single convolutional neural network (CNN) model for live viewport
+prediction and identified the limitations of the simple CNN structure.
+We further improve the performance of prediction by
+employing an alternate and hybrid deep learning approach involving
+both CNN and long short-term memory (LSTM) models.</p>
+                </figcaption>
+              </figure>
+            </div>
+            <h3 >Solution C: Object detection based viewport prediction(LiveObj)</h3>
+            <div>
+              <h4>A computer vision based user study</h4>
+              <div>
+                <figure>
+                  <img src="Ana_ani.png" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                  
+                  <figure>
+                    <img src="Ana_cok.png" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                    <figcaption>
+                      <p>
+                        To analyze the user viewing behavior, we first deploy the YOLOv3object detection algorithm to detect the objects in each videoframe.  Then, we implement the tracking algorithm from Collins etal. combined with location-based verification to match the objectsbetween frames.  After that, we parse the user head movement dataand draw the conclusion on which objects the user has been watchingduring the live streaming session.
+                      </p>
+                      <p>
+                        The analysis of the above two videos reveal an important observationthat the user’s viewport of interest (indicated by the temporal metric) isnot correlated with the size of the object (indicated by the spatial metric).Instead, the user’s viewport is heavily dependent upon the semanticsof the objects (i.e., the degree of importance or attractiveness) in thevideo, which validates our hypothesis that the users tend to watch themeaningful objects that they are interested in.
+                      </p>
+                      </figcaption>
+              </div>
+              <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+              </div>
+            <div class="left" style="float: left; width: 45%;">
+              <figure>
+                <img src="FlowImage_resize.png" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                <figcaption>
                   System Architecture.
                 </figcaption>
               </figure>
             </div>
-          <h2 id="publications">Publications</h2>
-            <ol>
-              <li> 
-                <b>Xianglong Feng</b>, Zeyang Bao, Sheng Wei, “LiveObj: Object Semantics-based Viewport Prediction for Live Mobile Virtual Reality Streaming", conditionally accepted by IEEE Conference on Virtual Reality and 3D User Interfaces (VR), March 2021.</i>
-              </li> 
-              <li> 
-                <b>Xianglong Feng</b>, Mengmei Ye, Ke xia, Sheng Wei, “Runtime Fault Injection Detection for FPGA-based DNN Execution Using Siamese Path Verification.” To appear in Design, Automation and Test in Europe (DATE), February 2021.</li>
-              <li> 
-                Sheen B, Yang J, <b>Xianglong Feng</b>, Chowdhury, M. “A Digital Twin for Reconfigurable Intelligent Surface Assisted Wireless Communication[J]”. arXiv preprint arXiv:2009.00454, 2020.</li>
-              <li> 
-                Zhongze Tang, <b>Xianglong Feng</b>, Yi Xie, Huy Phan, Tian Guo, Bo Yuan, Sheng Wei, “VVSec: Securing Volumetric Video Streaming via Benign Use of Adversarial Perturbation”, ACM Multimedia Conference (MM), October 2020.</li>
-              <li> 
-                <b>Xianglong Feng</b>, Yao Liu, Sheng Wei, “LiveDeep: Online Viewport Prediction for Live Virtual Reality Streaming Using Lifelong Deep Learning IEEE Conference on Virtual Reality and 3D User Interfaces (VR), March 2020</li>
-              <li> 
-                <b>Xianglong Feng</b>, Zeyang Bao, Sheng Wei, “Exploring CNN-based Viewport Prediction for Live Virtual Reality Streaming”. IEEE International Conference on Artificial Intelligence and Virtual Reality (AIVR), December 2019</li>
-              <li> 
-                Mengmei Ye, <b>Xianglong Feng</b>, Sheng Wei, “Runtime Hardware Security Verification Using Approximate Computing: A Case Study on Video Motion Detection”. Asian Hardware Oriented Security and Trust Symposium (AsianHOST), December 2019.</li>
-              <li> 
-                <b>Xianglong Feng</b>, Viswanathan Swaminathan, Sheng Wei, “Viewport Prediction for Live 360-Degree Mobile Video Streaming Using User-Content Hybrid Motion Tracking.” Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies (IMWUT), 3, 2, Article 43, 22 pages, June 2019.</li>
-              <li> 
-                Mengmei Ye, <b>Xianglong Feng</b>, Sheng Wei, “HISA: Hardware Isolation-based Secure Architecture for CPU-FPGA Embedded Systems.” International Conference On Computer Aided Design (ICCAD), Article No. 90, November 2018.</li>
-              <li> 
-                <b>Xianglong Feng</b>, Mengmei Ye, Viswanathan Swaminathan, Sheng Wei, “Towards the Security of Motion Detection-based Video Surveillance on IoT Devices.” ACM Multimedia Conference - Thematic Workshop, October 2017.</li>
-              <li> 
-                <b>Xianglong Feng</b>, Benjie Wei, Xiujie Jiang. “Design of Video Capture and Codec based on DM368.”, Electronic Design Engineering, June 2015  </li>
-            </ol>
-          
-          <h2 id="teaching">Teaching</h2>
-          <ol>
-            <li>
-              Fall 2020 <a href="https://www.ece.rutgers.edu/14332437-digital-systems-design">14:332:437 Digital Systems Design</a>. Lab TA and grading. 122 students w/ 2 TAs. Recitation, and Lab TA.
-            </li>
-            <li>
-              Spring 2020 <a href="https://www.ece.rutgers.edu/14332331-computer-architecture-and-assembly-language">14:332:331 Computer Architecture and Assembly Language</a>. Lab TA and grading. 122 students w/ 2 TAs. Recitation, and Lab TA.
-            </li>
-            <li>
-              Fall 2019 <a href="https://www.ece.rutgers.edu/14332437-digital-systems-design">14:332:437 Digital Systems Design</a>. Lab TA and grading. 162 students w/ 2 TAs.
-            </li>
-            <li>
-              Spring 2019 <a href="https://www.ece.rutgers.edu/14332452-software-engineering">14:332:452 Software Engineering</a>. The only TA for recitation, project mentoring.
-            </li>
-            <li>
-              Fall 2018 <a href="https://www.ece.rutgers.edu/14332437-digital-systems-design">14:332:437 Digital Systems Design</a>. Lab TA and grading. 165 students w/ 2 TAs.
-            </li>
-          </ol>
+            <div class="right" style="float: right; width: 45%;">
+              <figure>
+                <img src="SelectiveStream.png" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                <figcaption>
+                  <p>Error recovery strategies in selective streaming. (a) is the originalframe (red – predicted viewport, yellow – actual viewport).  (b) showsthe user view with no recovery.  (c) and (d) are the user views with adown-resolution rate of 20% and 60%, respectively</p>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+          <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+          </div>
+            
+          <h2 id="Security">Security</h2>
+            <div>
+              <h4 id="ARs">VVSec: Securing Volumetric Video Streaming via Benign Use ofAdversarial Perturbation</h4>
+              <figure>
+                <img src="VVsec.JPG" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                <figcaption>
+                  <p>
+                    Inspired by the nature of the adversarial attacks, we propose anovel defense mechanisms,VVSec, to protect the confidentiality ofvolumetric video. In a nutshell,VVSecadds adversarial perturbationat the sender (i.e., Alice) side of the volumetric video streaming, sothat even if Malice could extract the RGB-D facial information inplaintext, it would fail to pass the face authentication due to theeffect of the "adversarial" perturbation on the deep neural network.On the other hand, the original functionality of volumetric stream-ing especially the perceivable quality of experience to human usersis unchanged, as ensured by the design principle of adversarialperturbations.
+                  </p>
+                  </figcaption>
+            </div>
+            <div>
+              <h4 id="DNNFPGA">Runtime Fault Injection Detection for FPGA-based DNN Execution Using Siamese Path Verification</h4>
+              <figure>
+                <img src="NNsystem - Copy (2).png" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                <figcaption>
+                  <p>
+                    To analyze the user viewing behavior, we first deploy the YOLOv3object detection algorithm to detect the objects in each videoframe.  Then, we implement the tracking algorithm from Collins etal. combined with location-based verification to match the objectsbetween frames.  After that, we parse the user head movement dataand draw the conclusion on which objects the user has been watchingduring the live streaming session.
+                  </p>
+                  </figcaption>
+              <figure>
+                <img src="SPV.jpg" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                <figcaption>
+                  <p>
+                    Siamese Path Verification framework in the DNN
+                  </p>
+                  </figcaption>
+            </div>
+            <div>
+              <h4 id="HardwareSecurity">Towards the Security of Motion Detection-based Video
+                Surveillance on IoT Devices</h4>
+              <figure>
+                <img src="HardwareAttack.JPG" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                <figcaption>
+                  <p>
+                    We frst
+develop a proof-of-concept prototype demonstrating video replay
+attacks, in which the compromised surveillance device hides the
+chosen suspicious motion by overwriting the corresponding frames
+with pre-recorded normal frames under the control of the attacker.
+</p>
+                  </figcaption>
+              <figure>
+                <img src="TZ.JPG" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                <figcaption>
+                  <p>
+                    To address the security concerns, we develop a hardware-based
+IoT security framework that creates a trusted execution environment
+and physically isolates the security sensitive components,
+such as the motion detection module, from the rest of the system.
+We implement the security framework on an ARM system on chip
+(SoC).
+                  </p>
+                  </figcaption>
+            </div>
+
+            <div>
+              <h4 id="Runtime" >Runtime verification based on proactive checking and approximating computing</h4>
+              <figure>
+                <img src="ATTB.JPG" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                <figcaption>
+                  <p>
+                    To better illustrate the two CPU-FPGA threat models, we implement
+a prototype system of a security sensitive surveillance camera,
+which has an on-device motion detection module to detect the
+objects in motion in the captured video in real time, as demonstrated
+in the above figure, which shows the
+hardware system setup using Xilinx Zynq-7000 ZC702 SoC. The
+SoC has a CPU component that contains two ARM cores and an
+FPGA component that contains a Xilinx FPGA board. We employ
+the CPU part on the board to provide basic interface to receive
+the video frames from the HDMI card, and we deploy a motion
+detection IP core in the FPGA part to conduct real time motion detection
+based on the received video frames. As shown in (a) and
+(b), there is a remarkable white area to indicate the moving objects
+on the road. We further implement a threat model based on the prototype
+system. The outcome caused by the threat model is shown in (c), where the moving object is hidden in the background if
+there is no motion detected. The attack scenario is a “replay attack"
+</p>
+                  </figcaption>
+
+                  <div class="left" style="float: left; width: 48%;">
+                    <figure>
+                      <img src="DefenA.JPG" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                      <figcaption>
+                        In proactive output verification, we leverage the fact that the replay attack outputs the same pre-recorded video frames for all the
+different input frames. Our proactive countermeasure is to insert artificial motion patterns in a sampled set of
+input frames and check the corresponding output frames periodically for the inserted motion. In our video pipeline, the secure agent generates motion patterns and adds them into the input frames
+every k seconds.
+                      </figcaption>
+                    </figure>
+                  </div>
+                  <div class="right" style="float: right; width: 48%;">
+                    <figure>
+                      <img src="DefB.JPG" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                      <figcaption>
+                        <p> The inserted patterns will be captured by the motion detection module and labeled with white spots in the output
+                          frame, which can be as small as invisible to human. Then, the output verification in HISA can check the pixel values in the specific
+                          motion-inserted region to determine if they have been labeled in
+                          white.</p>
+                      </figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+                </div>
+
+              <figure>
+                <img src="DefC.JPG" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                <figcaption>
+                  <p>
+                    we develop and deploy the approximate
+computing-based verification framework to a CPU-FPGA prototype and conduct a comprehensive case study using a video
+motion detection application. The approximate computing
+algorithm employs two types of application-level approximations, namely spatial approximation and temporal approximation, to achieve the goals of runtime repeated execution and
+verification. Our empirical hardware evaluation on the Xilinx
+Zynq CPU-FPGA platform justifies the premium security and
+performance of the proposed approach.
+(SoC).
+                  </p>
+                  </figcaption>
+            </div>
+
+          <h2 id="6G">AI for next-generation wireless communication</h2>
+          <div>
+            <div class="left" style="float: left; width: 48%;">
+              <figure>
+                <img src="6GA.JPG" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                <figcaption>
+                  Reconfigurable Intelligent Surface (RIS) has
+emerged as one of the key technologies for 6G in recent years,
+which comprise a large number of low-cost passive elements
+that can smartly interact with the impinging electromagnetic
+waves for performance enhancement. However, optimally
+configuring massive number of RIS elements remains a
+challenge.
+                </figcaption>
+              </figure>
+            </div>
+            <div class="right" style="float: right; width: 48%;">
+              <figure>
+                <img src="6GB.JPG" loading="lazy" alt="Mountain landscape" width="700" height="400">
+                <figcaption>
+                  <p>In this paper, we present a novel digital-twin
+                    framework for RIS-assisted wireless networks which we name
+                    it Environment-Twin (Env-Twin). The goal of the Env-Twin
+                    framework is to enable automation of optimal control at various
+                    granularities. In this paper, we present one example of the EnvTwin models to learn the mapping function between the RIS
+                    configuration with measured attributes for the receiver
+                    location, and the corresponding achievable rate in an RISassisted wireless network without involving explicit channel
+                    estimation or beam training overhead. Once learned, our EnvTwin model can be used to predict optimal RIS configuration
+                    for any new receiver locations in the same wireless network.
+                    We leveraged deep learning (DL) techniques to build our model
+                    and studied its performance and robustness.</p>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+          <div id="footer" style="background-color:#FFA500;clear:both;text-align:center;">
+          </div>
+          </div>
 
         </article>
       </main>
